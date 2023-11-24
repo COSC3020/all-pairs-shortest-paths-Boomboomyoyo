@@ -1,0 +1,3 @@
+function allPairsShortestPaths(graph) {
+    return [];
+}
