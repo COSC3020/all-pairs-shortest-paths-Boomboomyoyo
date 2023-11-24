@@ -26,3 +26,17 @@ test code from other exercises.
 
 What is the worst-case time complexity ($\Theta$) of the algorithm? Add your
 answer, including your reasoning, to this markdown file.
+
+
+# Response
+This one was fairly simple. At first, I was going to try to reuse my Dijkstra's algorithm, but the pseudocode was basically all the code I would need, so I just rewrote this here. This was super simple.
+
+## Runtime Analysis
+
+The runtime of this algorithm is easy to analyze, as it is just a couple nested for loops. The first part, to set up the distance matrix has a runtime of $|V^2|$. The second part, to actually check for the shortest distance between each pair is $|V^3|$. So, the overall complexity is #\Theta\left(|V^3|\right)$.
+
+## References
+This code, which I grabbed for testing purposes, looks almost exactly like mine. I had to modify it so it would set the diagonal to 0, so it would match mine though.
+https://codepal.ai/code-generator/query/i9E5s9LK/javascript-floyd-warshall-algorithm
+
+I reused most of the testing code from my Dijkstra's exercise, which utilized my Wildcard's graph generation code.
