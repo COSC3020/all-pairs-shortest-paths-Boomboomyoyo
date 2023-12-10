@@ -1,8 +1,28 @@
+//import("graphlib")
+
 const fs = require('fs');
 const jsc = require('jsverify');
+const Graph = require('@dagrejs/graphlib').Graph;
+const graphlib = require('@dagrejs/graphlib').alg;
+
 
 eval(fs.readFileSync('code.js')+'');
 
+/*var testGraph = new Graph();
+testGraph.isDirected(false)
+testGraph.setNode(0)
+testGraph.hasNode(0)
+testGraph.setNode(1)
+testGraph.hasNode(1)
+testGraph.setEdge(0,1,4)
+testy123 = testGraph.edge(0,1)
+testy123 = testGraph.edges()
+testy321 = []
+for(elem of testy123)
+{
+    testy321.push(testGraph.edge(elem))
+}
+console.log("Hi")*/
 
 
 const test =
@@ -10,6 +30,8 @@ const test =
         // Create a connected graph of v nodes, where v is a random integer generated above.
         nodeCount = Math.max(int,1)
         var graph = connectedGraph(nodeCount)
+        var libGraph = new Graph();
+        libGraph.isDirected(false)
         // Choose a random node in the graph to find a path to
         sourceNode = Math.floor(Math.random()*(nodeCount))
         // Modify the graph from a directional graph with edges of length one to a bidirectional graph
@@ -17,6 +39,8 @@ const test =
         // Do this by checking for an edge, and then giving it and its correspondant the same random weight
         for(i = 0; i < graph.length; i++)
         {
+            libGraph.setNode(i)
+            libGraph.hasNode(i)
             for(j = 0; j < graph.length; j++)
             {
                 if(graph[i][j] == 1)
@@ -25,16 +49,35 @@ const test =
                     graph[i][j] = Math.max(weight, 2)
                     graph[j][i] = graph[i][j]
                 }
+                libGraph.setEdge(i, j, graph[i][i])
+                libGraph.setEdge(j, i, graph[j][i])
+                
             }
         }
         // Store the results of each implementation
-        results2 = allPairsShortestPaths(graph)
-        // Quickly map my results to the same format as theirs
-        results1 = floydWarshall(graph)
+        results1 = allPairsShortestPaths(graph)
+        // Results using external library, needs translated
+        /*
+        interimResults = graphlib.floydWarshall(libGraph, function(e) { return libGraph.edge(e.v, e.w); });
+        results2 = []
+        for(let k = 0; i < graph.length; i++)
+        {
+            results2.push([])
+            for(let l = 0; j < graph.length;)
+            {
+                temp = 
+                //if()
+                results2[i].push(0)
+            }
+        }*/
+        results2 = floydWarshall(graph)
+        
         // If something is going wrong, it will yell at me so I can fix it
         if(JSON.stringify(results1) != JSON.stringify(results2))
         {
-            console.log(graph)
+            console.log("Fail on test")
+            console.log(results1)
+            console.log(results2)
         }
         // Now compare the results of my function to a tested function
         return JSON.stringify(results1) == JSON.stringify(results2);

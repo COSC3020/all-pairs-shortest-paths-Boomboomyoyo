@@ -40,3 +40,7 @@ This code, which I grabbed for testing purposes, looks almost exactly like mine.
 https://codepal.ai/code-generator/query/i9E5s9LK/javascript-floyd-warshall-algorithm
 
 I reused most of the testing code from my Dijkstra's exercise, which utilized my Wildcard's graph generation code.
+
+Tried to use the library here to verify my results, but I couldn't figure out how to translate its results into something useable. Didn't seem to represent the information in a way I understand.
+https://github.com/dagrejs/graphlib/wiki/API-Reference#node-and-edge-representation
+https://github.com/dagrejs/graphlib/wiki
