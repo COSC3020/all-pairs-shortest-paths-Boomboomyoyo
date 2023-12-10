@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 const jsc = require('jsverify');
-const Graph = require('@dagrejs/graphlib').Graph;
-const graphlib = require('@dagrejs/graphlib').alg;
+//const Graph = require('@dagrejs/graphlib').Graph;
+//const graphlib = require('@dagrejs/graphlib').alg;
 
 
 eval(fs.readFileSync('code.js')+'');
@@ -30,8 +30,8 @@ const test =
         // Create a connected graph of v nodes, where v is a random integer generated above.
         nodeCount = Math.max(int,1)
         var graph = connectedGraph(nodeCount)
-        var libGraph = new Graph();
-        libGraph.isDirected(false)
+        //var libGraph = new Graph();
+        //libGraph.isDirected(false)
         // Choose a random node in the graph to find a path to
         sourceNode = Math.floor(Math.random()*(nodeCount))
         // Modify the graph from a directional graph with edges of length one to a bidirectional graph
@@ -39,8 +39,8 @@ const test =
         // Do this by checking for an edge, and then giving it and its correspondant the same random weight
         for(i = 0; i < graph.length; i++)
         {
-            libGraph.setNode(i)
-            libGraph.hasNode(i)
+            //libGraph.setNode(i)
+            //libGraph.hasNode(i)
             for(j = 0; j < graph.length; j++)
             {
                 if(graph[i][j] == 1)
@@ -49,8 +49,8 @@ const test =
                     graph[i][j] = Math.max(weight, 2)
                     graph[j][i] = graph[i][j]
                 }
-                libGraph.setEdge(i, j, graph[i][i])
-                libGraph.setEdge(j, i, graph[j][i])
+                //libGraph.setEdge(i, j, graph[i][i])
+                //libGraph.setEdge(j, i, graph[j][i])
                 
             }
         }
