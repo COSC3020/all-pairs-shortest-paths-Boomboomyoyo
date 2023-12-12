@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const jsc = require('jsverify');
+const assert = require('assert');
+
 //const Graph = require('@dagrejs/graphlib').Graph;
 //const graphlib = require('@dagrejs/graphlib').alg;
 
@@ -70,6 +72,7 @@ const test =
                 results2[i].push(0)
             }
         }*/
+        
         results2 = floydWarshall(graph)
         
         // If something is going wrong, it will yell at me so I can fix it
@@ -83,6 +86,54 @@ const test =
         return JSON.stringify(results1) == JSON.stringify(results2);
     });
 jsc.assert(test, { tests: 1000 });
+
+// Repurposed code from TSP Held Karp test code
+// Graph with no nodes should return a graph with no distances
+dm = [];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify([]))
+
+// If there is a node, whether it has a connection to itself or not, it should return a graph that
+// only has its own distance at zero
+dm = [[]];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify([[0]]));
+
+dm = [[0]];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify([[0]]));
+
+// Graph of no edges should return a graph of Infinities, except to themselves which should be zero.
+// Infinity represents that there is no path between the nodes
+dm = [[0,0,0],
+      [0,0,0],
+      [0,0,0]];
+sol = [[0,Infinity,Infinity],
+       [Infinity,0,Infinity],
+       [Infinity,Infinity,0]];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify(sol));
+
+// Just calculated this next ones out
+dm = [[0,1,4],
+      [1,0,2],
+      [4,2,0]];
+sol = [[0,1,3],
+       [1,0,2],
+       [3,2,0]];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify(sol));
+
+dm = [[0,3,1],
+      [3,0,2],
+      [1,2,0]];
+sol = [[0,3,1],
+       [3,0,2],
+       [1,2,0]];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify(sol));
+
+dm = [[0,4,1],
+      [4,0,2],
+      [1,2,0]];
+sol = [[0,3,1],
+       [3,0,2],
+       [1,2,0]];
+assert(JSON.stringify(allPairsShortestPaths(dm)) == JSON.stringify(sol));
 
 
 
